@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>TEST js</title>
+		<script type="text/javascript" src="cookie.js"></script>
+		<script type="text/javascript">
+			//单次
+			//setTimeout("alert('Wake up!!')",3000);
+			//setTimeout("document.getElementById('a').src = 'img/pics10.jpg';",3000);
+			//重复
+			//setInterval("alert('Wake up!!')",3000);
+			
+			function user(){													//第一次键入
+				if(navigator.cookieEnabled)										//浏览器是否支持Cookie
+					uName = readCookie("touch_uname");							//支持将存入变量
+				if(uName){														//Cookie中有姓名,直接欢迎
+					alert("hello " + uName + ", I missed you.");
+				}else{
+					alert('Hello, I am your pet rock.');
+				}
+			}
+			
+			function resize(){
+				document.getElementById("a").style.height = 
+					(document.body.clientHeight - 100) * 0.9;
+			}
+			
+			function touch(){																	//点击图片
+				if(uName){																		//如果不是第一次登录，即Cookie中有姓名,直接欢迎
+					alert("I like the attention," + uName + ". Thank you.");					
+				}else{
+					uName = prompt("What is your name?","Enter your mame here.");				
+					if(uName){																	//第一次登录
+						alert("It is good to meet you, " + uName + ".");						//键入姓名
+						if(navigate.cookieEnabled)
+							writeCookie("touch_uname", uName, 1*365);
+						else
+							alert("Sorry.你的浏览器不支持Cookie.");
+					}
+				}
+				document.getElementById("a").src = "img/pics10.jpg";						//替换图片
+				setTimeout("document.getElementById('a').src = 'img/pics09.jpg';",6000);	//一段时间后无操作,换回图片
+			}
+			
+		</script>
+	</head>
+	<body onload="user();touch();" onresize="resize()">
+		<div id="s" style="margin-top: 100px; text-align: center;">
+			<img id="a" src="img/pics09.jpg" alt="pics09.jpg"
+			style="cursor:pointer" onclick="touch();"/>
+		</div>
+	</body>
+</html>
